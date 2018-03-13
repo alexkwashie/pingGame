@@ -33,7 +33,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDom.src = 'dice-' + dice + '.png';
 
     // 3. Update result, only IF number is Not 1
-
+    Git test
 });
 
 
