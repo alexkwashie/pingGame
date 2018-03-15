@@ -17,8 +17,7 @@ activePlayer = 0;
 
 document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
+
 
 document.querySelector('.dice').style.display = 'none';
 
@@ -33,7 +32,30 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDom.src = 'dice-' + dice + '.png';
 
     // 3. Update result, only IF number is Not 1
-    Git test
+    if (dice != 1) {
+        //Continue add score to the roundScore
+        roundScore += dice;
+
+        //update score
+        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+
+    } else {
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; //THIS IS A TENARY OPERAOR, its just like an 'IF' statment
+
+        //Reset roundScore to 0
+        roundScore = 0;
+
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
+
+        document.querySelector('.player-0-panel').classList.remove('active');
+        document.querySelector('.player-1-panel').classList.add('active');
+    }
+
+
+
+
+
 });
 
 
