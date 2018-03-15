@@ -32,7 +32,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDom.src = 'dice-' + dice + '.png';
 
     // 3. Update result, only IF number is Not 1
-    if (dice != 1) {
+    if (dice !== 1) {
         //Continue add score to the roundScore
         roundScore += dice;
 
@@ -48,17 +48,30 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         document.getElementById('current-0').textContent = '0';
         document.getElementById('current-1').textContent = '0';
 
-        document.querySelector('.player-0-panel').classList.remove('active');
-        document.querySelector('.player-1-panel').classList.add('active');
+        document.querySelector('.player-0-panel').classList.toggle('active');
+        document.querySelector('.player-1-panel').classList.toggle('active');
+
+        //Hide dice to reset the game
+        document.querySelector('.dice').style.display = 'none';
+
+        //document.querySelector('.player-0-panel').classList.remove('active');
+        //document.querySelector('.player-1-panel').classList.add('active');
     }
-
-
-
-
 
 });
 
 
+document.querySelector('.btn-hold').addEventListener('click', function() {
+    //Add current score to Global score
+    score[activePlayer] += roundScore;
+
+    //Update UI
+    document.querySelector('#score-' + activePlayer).textContent = score[activePlayer];
+
+    //Check if player
+
+
+});
 //dice = Math.floor(Math.random() * 6) + 1;
 
 //document.querySelector('#current-' + activePlayer).textContent = dice;
