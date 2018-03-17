@@ -40,26 +40,30 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
 
     } else {
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; //THIS IS A TENARY OPERAOR, its just like an 'IF' statment
+        nextPlayer();
 
-        //Reset roundScore to 0
-        roundScore = 0;
-
-        document.getElementById('current-0').textContent = '0';
-        document.getElementById('current-1').textContent = '0';
-
-        document.querySelector('.player-0-panel').classList.toggle('active');
-        document.querySelector('.player-1-panel').classList.toggle('active');
-
-        //Hide dice to reset the game
-        document.querySelector('.dice').style.display = 'none';
-
-        //document.querySelector('.player-0-panel').classList.remove('active');
-        //document.querySelector('.player-1-panel').classList.add('active');
     }
 
 });
 
+function nextPlayer() {
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; //THIS IS A TENARY OPERAOR, its just like an 'IF' statment
+
+    //Reset roundScore to 0
+    roundScore = 0;
+
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+
+    //Hide dice to reset the game
+    document.querySelector('.dice').style.display = 'none';
+
+    //document.querySelector('.player-0-panel').classList.remove('active');
+    //document.querySelector('.player-1-panel').classList.add('active');
+}
 
 document.querySelector('.btn-hold').addEventListener('click', function() {
     //Add current score to Global score
@@ -68,10 +72,22 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     //Update UI
     document.querySelector('#score-' + activePlayer).textContent = score[activePlayer];
 
-    //Check if player
+
+    //Check if player won
+    if (score[activePlayer] >= 10) {
+        document.querySelector('#name-' + activePlayer).textContent = 'Player ' + (activePlayer + 1) + ' Won';
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    } else {
+        //2nd Player should continue playing
+        nextPlayer();
+    }
+
 
 
 });
+
 //dice = Math.floor(Math.random() * 6) + 1;
 
 //document.querySelector('#current-' + activePlayer).textContent = dice;
